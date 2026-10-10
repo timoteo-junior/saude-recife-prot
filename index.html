@@ -54,18 +54,18 @@
         
         .navbar {
             position: absolute; bottom: 0; width: 100%; height: 70px; background: var(--primary-dark); color: #a7f3d0;
-            display: flex; justify-content: space-around; align-items: center; font-size: 9px; z-index: 50;
+            display: flex; justify-content: space-around; align-items: center; font-size: 0.5625rem; z-index: 50;
             border-top-left-radius: 20px; border-top-right-radius: 20px; box-sizing: border-box;
         }
-        .navbar div { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; width: 16%; transition: color 0.2s; }
-        .navbar i { font-size: 20px; }
+        .navbar div { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; width: 25%; transition: color 0.2s; }
+        .navbar i { font-size: 1.25rem; }
         .navbar .active-nav { color: var(--white); font-weight: bold; }
         
         .btn-pill { border-radius: 9999px; font-weight: bold; padding: 14px 20px; text-align: center; cursor: pointer; transition: transform 0.1s; }
         .btn-pill:active { transform: scale(0.97); }
         .card-rounded { background: white; border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(22, 163, 74, 0.1); box-sizing: border-box; width: 100%; }
         
-        .avatar-circle { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.2s; background: white; border: 1px solid #e5e7eb; flex-shrink: 0; }
+        .avatar-circle { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.125rem; transition: all 0.2s; background: white; border: 1px solid #e5e7eb; flex-shrink: 0; }
         .avatar-selected { background: var(--accent-light); border: 2px solid var(--accent-dark); color: var(--primary-dark); }
         
         .glass-header { position: sticky; top: 0; background: rgba(248, 250, 252, 0.95); backdrop-filter: blur(8px); z-index: 20; padding: 20px 24px; border-bottom: 1px solid rgba(0,0,0,0.05); box-sizing: border-box; width: 100%; }
@@ -104,7 +104,7 @@
             </div>
             <div class="card-rounded p-6 mb-6">
                 <p class="text-xs font-bold mb-4 text-center">Entrar na sua conta</p>
-                <button onclick="falar('A entrar com Gov.br'); navigate('dashboard');" class="w-full bg-white border border-gray-200 text-primary-dark btn-pill flex items-center justify-center gap-2 shadow-sm hover:bg-gray-50">
+                <button onclick="falar('A entrar com Gov.br'); navigate('acessibilidade');" class="w-full bg-white border border-gray-200 text-primary-dark btn-pill flex items-center justify-center gap-2 shadow-sm hover:bg-gray-50">
                     <span class="text-sm font-bold mt-1">Entrar com</span>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Gov.br_logo.svg" alt="gov.br" class="h-6 object-contain">
                 </button>
@@ -112,7 +112,7 @@
             <div class="card-rounded p-5 text-center cursor-pointer active:scale-95 transition" onclick="falar('Abrindo ajuda para entrar'); navigate('ajuda');">
                 <i class="fas fa-info-circle text-accent-dark text-2xl mb-2"></i>
                 <p class="font-bold text-sm">Precisa de ajuda para entrar? Toque aqui</p>
-                <p class="text-[10px] mt-1" style="color: var(--text-light)">Um familiar de confiança pode ajudar.</p>
+                <p class="text-[0.625rem] mt-1" style="color: var(--text-light)">Um familiar de confiança pode ajudar.</p>
             </div>
         </div>
 
@@ -130,401 +130,15 @@
                         <p class="text-xs mt-1 leading-relaxed text-gray-700">Um familiar de confiança pode ajudar você a agendar, sem precisar saber sua senha. Ele só verá o que for necessário para essa tarefa, com acesso temporário.</p>
                     </div>
                 </div>
-                <button onclick="falar('Convidar um familiar'); navigate('login');" class="w-full bg-primary-dark btn-pill mb-4">Convidar familiar para ajudar</button>
+                <button onclick="falar('Convidar um familiar'); navigate('login');" class="w-full bg-primary-dark btn-pill mb-4 text-white">Convidar familiar para ajudar</button>
                 <button onclick="falar('Voltar'); navigateBack();" class="w-full bg-white border-2 border-gray-200 text-primary-dark btn-pill">Voltar</button>
             </div>
         </div>
 
-        <!-- DASHBOARD (Início) -->
-        <div id="dashboard" class="screen">
-            <div class="p-6 pb-4 rounded-b-[30px] bg-white shadow-sm mb-4 box-border w-full">
-                <div class="flex justify-between items-center mb-6">
-                    <div>
-                        <p class="text-[10px] uppercase font-bold text-accent-dark tracking-wider">Olá,</p>
-                        <h2 class="text-2xl font-bold">PACIENTE</h2>
-                    </div>
-                    <div class="avatar-circle shadow-sm cursor-pointer" onclick="falar('Abrir Perfil'); navigateTab('perfil-menu', document.getElementById('nav-perfil'));"><i class="fas fa-user text-gray-400"></i></div>
-                </div>
-                <div>
-                    <p class="text-xs font-bold mb-3" id="lbl-perfil">Perfil ativo: Você</p>
-                    <div class="flex gap-3 overflow-x-auto pb-2 scroll-smooth w-full">
-                        <div class="flex flex-col items-center gap-1 cursor-pointer" onclick="selecionarPerfil('Você', this)">
-                            <div class="avatar-circle avatar-selected"><i class="fas fa-user"></i></div>
-                            <span class="text-[10px] font-bold">Você</span>
-                        </div>
-                        <div class="flex flex-col items-center gap-1 cursor-pointer opacity-70" onclick="selecionarPerfil('João', this)">
-                            <div class="avatar-circle text-gray-500">J</div>
-                            <span class="text-[10px] font-medium text-gray-600">João (Dep.)</span>
-                        </div>
-                        <div class="flex flex-col items-center gap-1 cursor-pointer" onclick="falar('Adicionar dependente'); navigate('adicionar-dep');">
-                            <div class="avatar-circle border-dashed border-2 text-gray-400 bg-gray-50"><i class="fas fa-plus"></i></div>
-                            <span class="text-[10px] font-medium text-gray-600">Adicionar</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="px-5 flex flex-col gap-3 box-border w-full">
-                <!-- Botões de Atalho com Redirecionamento correto para abas -->
-                <button onclick="falar('Marcar uma consulta'); navigate('agendamento1');" class="card-rounded p-4 flex items-center gap-4 text-left active:scale-95 transition">
-                    <div class="w-12 h-12 rounded-2xl bg-accent-light flex items-center justify-center text-xl text-primary-dark flex-shrink-0"><i class="fas fa-calendar-check"></i></div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-xs">MARCAR UMA CONSULTA</h3>
-                        <p class="text-[10px] mt-1" style="color: var(--text-light)">Agende com facilidade</p>
-                    </div>
-                </button>
-                <button onclick="falar('Consultas marcadas'); navigateTab('consultas', document.getElementById('nav-consultas'));" class="card-rounded p-4 flex items-center gap-4 text-left active:scale-95 transition">
-                    <div class="w-12 h-12 rounded-2xl bg-yellow-50 flex items-center justify-center text-xl text-yellow-600 border border-yellow-100 flex-shrink-0"><i class="fas fa-calendar-alt"></i></div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-xs">CONSULTAS MARCADAS</h3>
-                        <p class="text-[10px] mt-1" style="color: var(--text-light)">Ver agendamentos futuros</p>
-                    </div>
-                </button>
-                <button onclick="falar('Resultados de exames'); navigate('resultados-exames');" class="card-rounded p-4 flex items-center gap-4 text-left active:scale-95 transition">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-xl text-blue-600 border border-blue-100 flex-shrink-0"><i class="fas fa-file-medical-alt"></i></div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-xs">RESULTADOS DE EXAMES</h3>
-                        <p class="text-[10px] mt-1" style="color: var(--text-light)">Veja os seus exames prontos</p>
-                    </div>
-                </button>
-                <button onclick="falar('Carteira digital'); navigateTab('carteira', document.getElementById('nav-carteira'));" class="card-rounded p-4 flex items-center gap-4 text-left active:scale-95 transition">
-                    <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-xl text-purple-500 border border-purple-100 flex-shrink-0"><i class="fas fa-id-card"></i></div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-xs">CARTEIRA DIGITAL</h3>
-                        <p class="text-[10px] mt-1" style="color: var(--text-light)">SUS, vacinas e atestados</p>
-                    </div>
-                </button>
-            </div>
-        </div>
-
-        <!-- AGENDAMENTO 1 -->
-        <div id="agendamento1" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
-                <div>
-                    <p class="text-[9px] font-bold text-accent-dark uppercase">Passo 1 de 2</p>
-                    <h2 class="text-lg font-bold">Marcar Consulta</h2>
-                </div>
-            </div>
-            <div class="p-6 pt-2">
-                <div class="bg-accent-light rounded-2xl p-4 flex justify-between items-center mb-6">
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-user-circle text-primary-dark text-xl"></i>
-                        <span class="text-xs font-bold text-primary-dark" id="lbl-contexto">Agendando para: Você</span>
-                    </div>
-                    <button onclick="falar('Trocar dependente'); navigateBack();" class="text-[10px] font-bold text-primary-dark underline">Trocar</button>
-                </div>
-                <h3 class="text-sm font-bold mb-4">Escolha a especialidade</h3>
-                <div class="flex flex-col gap-3">
-                    <button onclick="falar('Clínica Geral selecionada'); navigate('agendamento2');" class="card-rounded p-4 flex justify-between items-center active:scale-95 transition">
-                        <div class="flex items-center gap-4"><i class="fas fa-stethoscope text-accent-dark text-xl w-6"></i> <span class="font-bold text-sm">Clínica Geral</span></div>
-                        <i class="fas fa-chevron-right text-gray-300"></i>
-                    </button>
-                    <button onclick="falar('Pediatria selecionada'); navigate('agendamento2');" class="card-rounded p-4 flex justify-between items-center active:scale-95 transition">
-                        <div class="flex items-center gap-4"><i class="fas fa-child text-accent-dark text-xl w-6"></i> <span class="font-bold text-sm">Pediatria</span></div>
-                        <i class="fas fa-chevron-right text-gray-300"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- AGENDAMENTO 2 -->
-        <div id="agendamento2" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
-                <div>
-                    <p class="text-[9px] font-bold text-accent-dark uppercase">Passo 2 de 2</p>
-                    <h2 class="text-lg font-bold">Profissional e Horário</h2>
-                </div>
-            </div>
-            <div class="p-6 pt-2">
-                <h3 class="text-xs font-bold mb-3">Profissional</h3>
-                <div class="card-rounded p-4 flex gap-4 mb-6 border-2 border-accent-dark bg-accent-light bg-opacity-30">
-                    <img src="https://i.pravatar.cc/100?img=47" class="w-12 h-12 rounded-full object-cover border border-white">
-                    <div>
-                        <p class="font-bold text-sm">Dra. Ana Souza</p>
-                        <p class="text-[10px]" style="color: var(--text-light)">Clínica Geral - CRM 1234</p>
-                    </div>
-                </div>
-                
-                <h3 class="text-xs font-bold mb-3">Horário</h3>
-                <div class="flex gap-2 pb-4 mb-4">
-                    <div class="px-4 py-2 rounded-xl border-2 border-accent-dark bg-accent-light text-primary-dark text-xs font-bold cursor-pointer">09:00</div>
-                    <div class="px-4 py-2 rounded-xl border border-gray-200 bg-white text-xs cursor-pointer">10:30</div>
-                </div>
-
-                <h3 class="text-xs font-bold mb-3">Como prefere ser atendido?</h3>
-                <div class="flex gap-3 mb-6">
-                    <div id="btn-presencial" class="flex-1 p-3 rounded-xl border-2 border-accent-dark bg-accent-light cursor-pointer text-center" onclick="selecionarModalidade('presencial')">
-                        <i class="fas fa-hospital text-primary-dark text-xl mb-2"></i>
-                        <p class="font-bold text-[11px] text-primary-dark">Presencial</p>
-                        <p class="text-[9px] text-primary-dark mt-1 opacity-80">Na unidade</p>
-                    </div>
-                    <div id="btn-video" class="flex-1 p-3 rounded-xl border border-gray-200 bg-white cursor-pointer text-center" onclick="selecionarModalidade('video')">
-                        <i class="fas fa-video text-gray-400 text-xl mb-2" id="icon-video"></i>
-                        <p class="font-bold text-[11px] text-gray-600" id="text-video">Por vídeo</p>
-                        <p class="text-[9px] text-gray-500 mt-1" id="subtext-video">Online</p>
-                    </div>
-                </div>
-
-                <button onclick="falar('Avançar para confirmação'); navigate('confirmacao');" class="w-full bg-primary-dark btn-pill">Continuar</button>
-            </div>
-        </div>
-
-        <!-- CONFIRMAÇÃO -->
-        <div id="confirmacao" class="screen">
-            <div class="glass-header flex items-center justify-center gap-4">
-                <h2 class="text-lg font-bold">Resumo do Agendamento</h2>
-            </div>
-            <div class="p-6 text-center">
-                <i class="fas fa-check-circle text-accent-dark text-5xl mb-4"></i>
-                <h2 class="text-xl font-bold mb-6">Consulta Agendada!</h2>
-                
-                <div class="card-rounded p-4 text-left mb-6">
-                    <p class="text-xs font-bold mb-1">Dra. Ana Souza (Clínica Geral)</p>
-                    <p class="text-xs text-gray-600"><i class="far fa-calendar-alt w-5 text-center"></i> Terça, 12 de Março</p>
-                    <p class="text-xs text-gray-600"><i class="far fa-clock w-5 text-center"></i> 09:00</p>
-                    <p class="text-xs text-gray-600 mt-2 font-bold" id="lbl-modalidade-resumo"><i class="fas fa-hospital w-5 text-center text-primary-dark"></i> Presencial</p>
-                </div>
-
-                <h3 class="text-xs font-bold mb-3 text-left">Como prefere receber o lembrete?</h3>
-                <div class="flex gap-3 mb-8">
-                    <button class="flex-1 py-2 border-2 border-accent-dark bg-accent-light text-primary-dark rounded-xl text-xs font-bold">No app</button>
-                    <button class="flex-1 py-2 border border-gray-300 bg-white text-gray-600 rounded-xl text-xs font-bold"><i class="fab fa-whatsapp text-green-500 mr-1"></i> WhatsApp</button>
-                </div>
-
-                <button id="btn-sala-espera" onclick="falar('Entrando na sala de espera'); navigate('sala-espera');" class="w-full bg-primary-dark btn-pill mb-3 hidden">Ir para Sala de Espera</button>
-                <button onclick="falar('Voltar ao início'); navigateTab('dashboard', document.getElementById('nav-dashboard'));" class="w-full bg-white border-2 border-gray-200 text-primary-dark btn-pill">Voltar ao Início</button>
-            </div>
-        </div>
-
-        <!-- SALA DE ESPERA VIRTUAL -->
-        <div id="sala-espera" class="screen bg-gray-900 text-white">
-            <div class="p-6 flex flex-col h-full justify-between pt-12">
-                <div class="text-center">
-                    <h2 class="text-sm font-bold text-gray-300 mb-1">Sua consulta com Dra. Ana Souza</h2>
-                    <h1 class="text-4xl font-bold text-accent-light mb-8">Começa em: 04:32</h1>
-                    
-                    <div class="bg-gray-800 border border-gray-700 rounded-2xl p-6 text-center shadow-lg">
-                        <div class="flex justify-center gap-6 mb-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-accent-dark"><i class="fas fa-video"></i></div>
-                            <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-accent-dark"><i class="fas fa-microphone"></i></div>
-                        </div>
-                        <p class="text-sm font-bold text-gray-200">Testando câmera e microfone...</p>
-                        <p class="text-xs text-gray-400 mt-2">Sua consulta começa em breve.</p>
-                    </div>
-                </div>
-
-                <div class="mt-auto">
-                    <button class="w-full bg-accent-dark text-white rounded-full font-bold p-4 text-center mb-4 opacity-50 cursor-not-allowed">Entrar na consulta</button>
-                    <p class="text-[10px] text-center text-gray-400 underline cursor-pointer" onclick="navigateTab('dashboard', document.getElementById('nav-dashboard'))">Se preferir, você pode remarcar para atendimento presencial a qualquer momento.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- RESULTADOS DE EXAMES -->
-        <div id="resultados-exames" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
-                <h2 class="text-lg font-bold">Resultados de Exames</h2>
-            </div>
-            <div class="p-6 flex flex-col gap-3">
-                <div class="card-rounded p-4 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="falar('Hemograma Completo. Baixar PDF'); alert('Iniciando download do PDF...')">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-file-pdf"></i></div>
-                        <div>
-                            <p class="font-bold text-sm">Hemograma Completo</p>
-                            <p class="text-[10px] text-gray-500">Realizado em 10/03/2026</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-download text-gray-300"></i>
-                </div>
-                <div class="card-rounded p-4 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="falar('Glicemia. Baixar PDF'); alert('Iniciando download do PDF...')">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-file-pdf"></i></div>
-                        <div>
-                            <p class="font-bold text-sm">Glicemia em Jejum</p>
-                            <p class="text-[10px] text-gray-500">Realizado em 10/03/2026</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-download text-gray-300"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- CARTEIRA DIGITAL -->
-        <div id="carteira" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <h2 class="text-lg font-bold ml-2">Carteira Digital</h2>
-            </div>
-            <div class="p-6">
-                <div class="mb-6 rounded-2xl overflow-hidden shadow-md border border-gray-200 bg-white p-2 text-center cursor-pointer hover:opacity-95 transition" onclick="falar('Ampliar cartão do SUS'); abrirZoom();">
-                    <img id="img-cartao-sus" src="https://suporte-candidatos.gupy.io/servlet/rtaImage?eid=ka0bJ000000A9wT&feoid=00NHs00000BGpMw&refid=0EMbJ0000010EvJ" alt="Cartão Nacional de Saúde" class="w-full h-auto rounded-xl">
-                    <p class="text-[10px] mt-3 font-bold uppercase tracking-wider text-gray-500"><i class="fas fa-expand-alt mr-1"></i> Toque para ampliar</p>
-                </div>
-                <h3 class="font-bold text-xs mb-3">Mais Documentos</h3>
-                <div class="flex flex-col gap-3">
-                    <button onclick="falar('Caderneta de Vacinação'); navigate('vacinas');" class="card-rounded p-4 flex justify-between items-center text-left active:scale-95 transition">
-                        <span class="font-bold text-sm flex items-center gap-3"><i class="fas fa-syringe text-primary-dark text-lg w-6"></i> Caderneta de Vacinação</span><i class="fas fa-chevron-right text-gray-300"></i>
-                    </button>
-                    <button onclick="falar('Documentos Pessoais'); navigate('doc-pessoais');" class="card-rounded p-4 flex justify-between items-center text-left active:scale-95 transition">
-                        <span class="font-bold text-sm flex items-center gap-3"><i class="fas fa-file-alt text-primary-dark text-lg w-6"></i> Documentos Pessoais</span><i class="fas fa-chevron-right text-gray-300"></i>
-                    </button>
-                    <button onclick="falar('Receitas Médicas'); navigate('receitas');" class="card-rounded p-4 flex justify-between items-center text-left active:scale-95 transition">
-                        <span class="font-bold text-sm flex items-center gap-3"><i class="fas fa-prescription text-primary-dark text-lg w-6"></i> Receitas Médicas</span><i class="fas fa-chevron-right text-gray-300"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- DOCUMENTOS INTERATIVOS DA CARTEIRA -->
-        <!-- Caderneta de Vacinação -->
-        <div id="vacinas" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
-                <h2 class="text-lg font-bold">Caderneta de Vacinação</h2>
-            </div>
-            <div class="p-6 flex flex-col gap-3">
-                <div class="card-rounded p-4 border-l-4 border-accent-dark">
-                    <p class="text-[10px] text-gray-500 mb-1">Dose Única • 15/04/2025</p>
-                    <h3 class="font-bold text-sm mb-1">COVID-19 (Bivalente)</h3>
-                    <p class="text-xs text-gray-600"><i class="fas fa-check-circle text-accent-dark mr-1"></i> Aplicada na UBS Centro</p>
-                </div>
-                <div class="card-rounded p-4 border-l-4 border-accent-dark">
-                    <p class="text-[10px] text-gray-500 mb-1">Anual • 20/05/2025</p>
-                    <h3 class="font-bold text-sm mb-1">Influenza (Gripe)</h3>
-                    <p class="text-xs text-gray-600"><i class="fas fa-check-circle text-accent-dark mr-1"></i> Aplicada na UBS Centro</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Documentos Pessoais -->
-        <div id="doc-pessoais" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
-                <h2 class="text-lg font-bold">Documentos Pessoais</h2>
-            </div>
-            <div class="p-6 flex flex-col gap-3">
-                <div class="card-rounded p-5">
-                    <h3 class="text-[10px] uppercase font-bold text-gray-500 tracking-wider mb-1">CPF</h3>
-                    <p class="font-bold text-lg text-primary-dark tracking-widest">123.456.789-00</p>
-                </div>
-                <div class="card-rounded p-5">
-                    <h3 class="text-[10px] uppercase font-bold text-gray-500 tracking-wider mb-1">RG (Registro Geral)</h3>
-                    <p class="font-bold text-lg text-primary-dark tracking-widest">9.876.543</p>
-                    <p class="text-xs text-gray-500 mt-2">SSP/PE</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Receitas Médicas -->
-        <div id="receitas" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
-                <h2 class="text-lg font-bold">Receitas Médicas</h2>
-            </div>
-            <div class="p-6 flex flex-col gap-3">
-                <div class="card-rounded p-4 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="falar('Receita Losartana. Baixar PDF'); alert('Iniciando download da receita...')">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-accent-light text-primary-dark flex items-center justify-center text-xl"><i class="fas fa-prescription"></i></div>
-                        <div>
-                            <p class="font-bold text-sm">Uso Contínuo (Losartana)</p>
-                            <p class="text-[10px] text-gray-500">Emitido: 10/03/2026</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-download text-gray-300"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- CONSULTAS MARCADAS -->
-        <div id="consultas" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <h2 class="text-lg font-bold ml-2">Consultas Marcadas</h2>
-            </div>
-            <div class="p-6 flex flex-col gap-4">
-                <div class="card-rounded p-4 border-l-4 border-primary-dark">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-[10px] bg-accent-light px-2 py-1 rounded font-bold text-primary-dark">Clínica Geral</span>
-                        <span class="text-[10px] text-gray-500">12 de Março</span>
-                    </div>
-                    <h3 class="font-bold text-sm mb-1">Dra. Ana Souza</h3>
-                    <p class="text-xs text-gray-600 mb-3"><i class="fas fa-map-marker-alt mr-1"></i> UBS Centro</p>
-                    <div class="flex gap-2">
-                        <button onclick="falar('Cancelar consulta'); alert('Consulta cancelada com sucesso!')" class="flex-1 bg-white border border-red-200 py-2 rounded-xl text-xs font-bold text-red-600">Cancelar</button>
-                        <button onclick="falar('Detalhes da consulta'); navigate('detalhes-consulta');" class="flex-1 bg-primary-dark text-white py-2 rounded-xl text-xs font-bold">Detalhes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DETALHES DA CONSULTA -->
-        <div id="detalhes-consulta" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
-                <h2 class="text-lg font-bold">Detalhes do Agendamento</h2>
-            </div>
-            <div class="p-6">
-                <div class="card-rounded p-5 mb-4 border-t-4 border-primary-dark">
-                    <span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded mb-3 inline-block">Confirmado</span>
-                    <h2 class="text-lg font-bold mb-1">Dra. Ana Souza</h2>
-                    <p class="text-xs text-gray-600 mb-5 border-b border-gray-100 pb-4">Clínica Geral</p>
-                    
-                    <div class="flex flex-col gap-4">
-                        <div class="flex items-start gap-3">
-                            <i class="fas fa-calendar-day text-primary-dark mt-1 text-lg"></i>
-                            <div>
-                                <p class="text-xs font-bold text-gray-800">Data e Hora</p>
-                                <p class="text-[11px] text-gray-600">Terça-feira, 12 de Março às 09:00</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fas fa-map-marker-alt text-primary-dark mt-1 text-lg"></i>
-                            <div>
-                                <p class="text-xs font-bold text-gray-800">Local</p>
-                                <p class="text-[11px] text-gray-600">UBS Centro<br>Rua da Saúde, 123 - Centro</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fas fa-info-circle text-primary-dark mt-1 text-lg"></i>
-                            <div>
-                                <p class="text-xs font-bold text-gray-800">Preparo e Orientações</p>
-                                <p class="text-[11px] text-gray-600">Chegue com 15 minutos de antecedência. Leve um documento original com foto.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="falar('Cancelar consulta'); alert('Consulta cancelada!'); navigateTab('dashboard', document.getElementById('nav-dashboard'));" class="w-full bg-white border border-red-200 text-red-600 btn-pill">Cancelar Consulta</button>
-            </div>
-        </div>
-
-        <!-- NOTIFICAÇÕES (Principal) -->
-        <div id="notificacoes" class="screen">
-            <div class="glass-header flex items-center gap-4">
-                <h2 class="text-lg font-bold ml-2">Notificações e Avisos</h2>
-            </div>
-            <div class="p-6 flex flex-col gap-3">
-                <div class="card-rounded p-4 cursor-pointer" onclick="navigateTab('consultas', document.getElementById('nav-consultas'))">
-                    <div class="flex items-center gap-3 mb-2">
-                        <i class="fas fa-bell text-primary-dark text-lg"></i>
-                        <h3 class="font-bold text-xs">Lembrete de Consulta</h3>
-                    </div>
-                    <p class="text-xs text-gray-600">A sua consulta com a Dra. Ana Souza é amanhã às 09:00 na UBS Centro.</p>
-                    <span class="text-[9px] text-gray-400 mt-2 block">Há 2 horas</span>
-                </div>
-                <div class="card-rounded p-4 cursor-pointer" onclick="navigate('resultados-exames')">
-                    <div class="flex items-center gap-3 mb-2">
-                        <i class="fas fa-file-medical text-primary-dark text-lg"></i>
-                        <h3 class="font-bold text-xs">Resultado de Exame Disponível</h3>
-                    </div>
-                    <p class="text-xs text-gray-600">O seu hemograma completo já se encontra pronto para visualização.</p>
-                    <span class="text-[9px] text-gray-400 mt-2 block">Ontem</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- ACESSIBILIDADE E AJUSTES -->
+        <!-- ACESSIBILIDADE E AJUSTES (Onboarding) -->
         <div id="acessibilidade" class="screen">
             <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
                 <h2 class="text-lg font-bold ml-2">Acessibilidade e Ajustes</h2>
             </div>
             <div class="p-6">
@@ -552,7 +166,7 @@
                 <!-- Filtros para Daltonismo -->
                 <div class="card-rounded p-5 mb-4">
                     <h3 class="text-sm font-bold mb-2">Filtros para Daltonismo</h3>
-                    <p class="text-[10px] mb-3" style="color: var(--text-light)">Ajuste as cores da tela se tiver dificuldade em distingui-las.</p>
+                    <p class="text-[0.625rem] mb-3" style="color: var(--text-light)">Ajuste as cores da tela se tiver dificuldade em distingui-las.</p>
                     <select id="select-daltonismo" onchange="setDaltonismo(this.value)" class="w-full p-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-primary-dark text-sm cursor-pointer font-bold text-gray-700">
                         <option value="none">Padrão (Sem filtro)</option>
                         <option value="protanopia">Protanopia (vermelho)</option>
@@ -565,7 +179,7 @@
                 <div class="card-rounded p-5 mb-4 flex justify-between items-center" onclick="toggleContrast()">
                     <div>
                         <h3 class="text-sm font-bold">Alto contraste</h3>
-                        <p class="text-[10px] mt-1 text-gray-500">Inverte as cores</p>
+                        <p class="text-[0.625rem] mt-1 text-gray-500">Inverte as cores</p>
                     </div>
                     <div id="toggle-contrast-track" class="toggle-track"><div class="toggle-thumb"></div></div>
                 </div>
@@ -573,7 +187,7 @@
                 <div class="card-rounded p-5 mb-4 flex justify-between items-center" onclick="toggleVoice()">
                     <div>
                         <h3 class="text-sm font-bold">Leitura por voz</h3>
-                        <p class="text-[10px] mt-1 text-gray-500">Assistente de tela</p>
+                        <p class="text-[0.625rem] mt-1 text-gray-500">Assistente de tela</p>
                     </div>
                     <div id="toggle-voice-track" class="toggle-track"><div class="toggle-thumb"></div></div>
                 </div>
@@ -581,9 +195,434 @@
                 <div class="card-rounded p-5 mb-4 flex justify-between items-center" onclick="toggleFontDyslexia()">
                     <div>
                         <h3 class="text-sm font-bold">Fonte para Dislexia</h3>
-                        <p class="text-[10px] mt-1 text-gray-500">Letra facilitada</p>
+                        <p class="text-[0.625rem] mt-1 text-gray-500">Letra facilitada</p>
                     </div>
                     <div id="toggle-dys-track" class="toggle-track"><div class="toggle-thumb"></div></div>
+                </div>
+                
+                <button onclick="falar('Continuar para o início'); navigateTab('dashboard', document.getElementById('nav-dashboard'));" class="w-full bg-primary-dark btn-pill text-white mt-6 mb-4 shadow-md text-lg">Continuar para o Início</button>
+            </div>
+        </div>
+
+        <!-- DASHBOARD (Início) -->
+        <div id="dashboard" class="screen">
+            <div class="p-6 pb-4 rounded-b-[30px] bg-white shadow-sm mb-4 box-border w-full">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <p class="text-[0.5625rem] uppercase font-bold text-accent-dark tracking-wider">Olá,</p>
+                        <h2 class="text-2xl font-bold">PACIENTE</h2>
+                    </div>
+                    <div class="avatar-circle shadow-sm cursor-pointer" onclick="falar('Abrir Perfil'); navigateTab('perfil-menu', document.getElementById('nav-perfil'));"><i class="fas fa-user text-gray-400"></i></div>
+                </div>
+                <div>
+                    <p class="text-xs font-bold mb-3" id="lbl-perfil">Perfil ativo: Você</p>
+                    <div class="flex gap-3 overflow-x-auto pb-2 scroll-smooth w-full">
+                        <div class="flex flex-col items-center gap-1 cursor-pointer" onclick="selecionarPerfil('Você', this)">
+                            <div class="avatar-circle avatar-selected"><i class="fas fa-user"></i></div>
+                            <span class="text-[0.625rem] font-bold">Você</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1 cursor-pointer opacity-70" onclick="selecionarPerfil('João', this)">
+                            <div class="avatar-circle text-gray-500">J</div>
+                            <span class="text-[0.625rem] font-medium text-gray-600">João (Dep.)</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1 cursor-pointer" onclick="falar('Adicionar dependente'); navigate('adicionar-dep');">
+                            <div class="avatar-circle border-dashed border-2 text-gray-400 bg-gray-50"><i class="fas fa-plus"></i></div>
+                            <span class="text-[0.625rem] font-medium text-gray-600">Adicionar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-5 flex flex-col gap-3 box-border w-full pb-6">
+                <!-- Botões de Atalho -->
+                <button onclick="falar('Marcar uma consulta'); navigate('agendamento1');" class="card-rounded p-4 flex items-center gap-4 text-left active:scale-95 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-accent-light flex items-center justify-center text-xl text-primary-dark flex-shrink-0"><i class="fas fa-calendar-check"></i></div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs">MARCAR UMA CONSULTA</h3>
+                        <p class="text-[0.625rem] mt-1" style="color: var(--text-light)">Agende com facilidade</p>
+                    </div>
+                </button>
+                <button onclick="falar('Consultas marcadas'); navigate('consultas');" class="card-rounded p-4 flex items-center gap-4 text-left active:scale-95 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-yellow-50 flex items-center justify-center text-xl text-yellow-600 border border-yellow-100 flex-shrink-0"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs">CONSULTAS MARCADAS</h3>
+                        <p class="text-[0.625rem] mt-1" style="color: var(--text-light)">Ver agendamentos futuros</p>
+                    </div>
+                </button>
+                <button onclick="falar('Carteira digital'); navigate('carteira');" class="card-rounded p-4 flex items-center gap-4 text-left active:scale-95 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-xl text-purple-500 border border-purple-100 flex-shrink-0"><i class="fas fa-id-card"></i></div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs">CARTEIRA DIGITAL</h3>
+                        <p class="text-[0.625rem] mt-1" style="color: var(--text-light)">SUS, vacinas e atestados</p>
+                    </div>
+                </button>
+                <button onclick="falar('Resultados de exames'); navigate('resultados-exames');" class="card-rounded p-4 flex items-center gap-4 text-left active:scale-95 transition">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-xl text-blue-600 border border-blue-100 flex-shrink-0"><i class="fas fa-file-medical-alt"></i></div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs">RESULTADOS DE EXAMES</h3>
+                        <p class="text-[0.625rem] mt-1" style="color: var(--text-light)">Veja os seus exames prontos</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- AGENDAMENTO 1 -->
+        <div id="agendamento1" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <div>
+                    <p class="text-[0.5625rem] font-bold text-accent-dark uppercase">Passo 1 de 2</p>
+                    <h2 class="text-lg font-bold">Marcar Consulta</h2>
+                </div>
+            </div>
+            <div class="p-6 pt-2">
+                <div class="bg-accent-light rounded-2xl p-4 flex justify-between items-center mb-6">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-user-circle text-primary-dark text-xl"></i>
+                        <span class="text-xs font-bold text-primary-dark" id="lbl-contexto">Agendando para: Você</span>
+                    </div>
+                    <button onclick="falar('Trocar dependente'); navigateBack();" class="text-[0.625rem] font-bold text-primary-dark underline">Trocar</button>
+                </div>
+                
+                <h3 class="text-sm font-bold mb-4">Escolha a especialidade</h3>
+                <div class="flex flex-col gap-3">
+                    
+                    <!-- Novo Botão de Chatbot -->
+                    <button onclick="falar('Assistente Virtual Chatbot'); navigate('chatbot');" class="card-rounded p-4 flex justify-between items-center active:scale-95 transition border-2 border-blue-200 bg-blue-50 mb-2">
+                        <div class="flex items-center gap-4"><i class="fas fa-robot text-blue-500 text-xl w-6"></i> <span class="font-bold text-sm text-blue-700">Assistente Virtual (Chatbot)</span></div>
+                        <i class="fas fa-chevron-right text-blue-300"></i>
+                    </button>
+
+                    <button onclick="falar('Clínica Geral selecionada'); navigate('agendamento2');" class="card-rounded p-4 flex justify-between items-center active:scale-95 transition">
+                        <div class="flex items-center gap-4"><i class="fas fa-stethoscope text-accent-dark text-xl w-6"></i> <span class="font-bold text-sm">Clínica Geral</span></div>
+                        <i class="fas fa-chevron-right text-gray-300"></i>
+                    </button>
+                    <button onclick="falar('Pediatria selecionada'); navigate('agendamento2');" class="card-rounded p-4 flex justify-between items-center active:scale-95 transition">
+                        <div class="flex items-center gap-4"><i class="fas fa-child text-accent-dark text-xl w-6"></i> <span class="font-bold text-sm">Pediatria</span></div>
+                        <i class="fas fa-chevron-right text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CHATBOT -->
+        <div id="chatbot" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <div>
+                    <p class="text-[0.5625rem] font-bold text-blue-500 uppercase">Assistente Inteligente</p>
+                    <h2 class="text-lg font-bold">Chatbot Saúde</h2>
+                </div>
+            </div>
+            <div class="p-6 flex flex-col min-h-[calc(100%-70px)]">
+                <div class="flex-1 mb-8 flex flex-col gap-4">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-robot"></i></div>
+                        <div class="bg-white border border-gray-200 text-gray-800 p-3 rounded-2xl rounded-tl-none shadow-sm text-sm">
+                            Olá! Sou o assistente virtual do Mais Saúde. Posso ajudar você a marcar a sua consulta. Que especialidade ou sintoma tem hoje?
+                        </div>
+                    </div>
+                </div>
+                <!-- Input de Mensagem -->
+                <div class="mt-auto flex gap-2">
+                    <input type="text" placeholder="Digite sua mensagem..." class="flex-1 p-3 rounded-full border border-gray-300 text-sm focus:outline-none focus:border-blue-500 shadow-sm">
+                    <button onclick="falar('Enviar mensagem'); alert('Funcionalidade de chatbot em desenvolvimento.')" class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 active:scale-95 transition"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AGENDAMENTO 2 -->
+        <div id="agendamento2" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <div>
+                    <p class="text-[0.5625rem] font-bold text-accent-dark uppercase">Passo 2 de 2</p>
+                    <h2 class="text-lg font-bold">Profissional e Horário</h2>
+                </div>
+            </div>
+            <div class="p-6 pt-2">
+                <h3 class="text-xs font-bold mb-3">Profissional</h3>
+                <div class="card-rounded p-4 flex gap-4 mb-6 border-2 border-accent-dark bg-accent-light bg-opacity-30">
+                    <img src="https://i.pravatar.cc/100?img=47" class="w-12 h-12 rounded-full object-cover border border-white">
+                    <div>
+                        <p class="font-bold text-sm">Dra. Ana Souza</p>
+                        <p class="text-[0.625rem]" style="color: var(--text-light)">Clínica Geral - CRM 1234</p>
+                    </div>
+                </div>
+                
+                <h3 class="text-xs font-bold mb-3">Horário</h3>
+                <div class="flex gap-2 pb-4 mb-4">
+                    <div class="px-4 py-2 rounded-xl border-2 border-accent-dark bg-accent-light text-primary-dark text-xs font-bold cursor-pointer">09:00</div>
+                    <div class="px-4 py-2 rounded-xl border border-gray-200 bg-white text-xs cursor-pointer">10:30</div>
+                </div>
+
+                <h3 class="text-xs font-bold mb-3">Como prefere ser atendido?</h3>
+                <div class="flex gap-3 mb-6">
+                    <div id="btn-presencial" class="flex-1 p-3 rounded-xl border-2 border-accent-dark bg-accent-light cursor-pointer text-center" onclick="selecionarModalidade('presencial')">
+                        <i class="fas fa-hospital text-primary-dark text-xl mb-2"></i>
+                        <p class="font-bold text-[0.6875rem] text-primary-dark">Presencial</p>
+                        <p class="text-[0.5625rem] text-primary-dark mt-1 opacity-80">Na unidade</p>
+                    </div>
+                    <div id="btn-video" class="flex-1 p-3 rounded-xl border border-gray-200 bg-white cursor-pointer text-center" onclick="selecionarModalidade('video')">
+                        <i class="fas fa-video text-gray-400 text-xl mb-2" id="icon-video"></i>
+                        <p class="font-bold text-[0.6875rem] text-gray-600" id="text-video">Por vídeo</p>
+                        <p class="text-[0.5625rem] text-gray-500 mt-1" id="subtext-video">Online</p>
+                    </div>
+                </div>
+
+                <button onclick="falar('Avançar para confirmação'); navigate('confirmacao');" class="w-full bg-primary-dark btn-pill text-white">Continuar</button>
+            </div>
+        </div>
+
+        <!-- CONFIRMAÇÃO -->
+        <div id="confirmacao" class="screen">
+            <div class="glass-header flex items-center justify-center gap-4">
+                <h2 class="text-lg font-bold">Resumo do Agendamento</h2>
+            </div>
+            <div class="p-6 text-center">
+                <i class="fas fa-check-circle text-accent-dark text-5xl mb-4"></i>
+                <h2 class="text-xl font-bold mb-6">Consulta Agendada!</h2>
+                
+                <div class="card-rounded p-4 text-left mb-6">
+                    <p class="text-xs font-bold mb-1">Dra. Ana Souza (Clínica Geral)</p>
+                    <p class="text-xs text-gray-600"><i class="far fa-calendar-alt w-5 text-center"></i> Terça, 12 de Março</p>
+                    <p class="text-xs text-gray-600"><i class="far fa-clock w-5 text-center"></i> 09:00</p>
+                    <p class="text-xs text-gray-600 mt-2 font-bold" id="lbl-modalidade-resumo"><i class="fas fa-hospital w-5 text-center text-primary-dark"></i> Presencial</p>
+                </div>
+
+                <h3 class="text-xs font-bold mb-3 text-left">Como prefere receber o lembrete?</h3>
+                <div class="flex gap-3 mb-8">
+                    <button class="flex-1 py-2 border-2 border-accent-dark bg-accent-light text-primary-dark rounded-xl text-xs font-bold">No app</button>
+                    <button class="flex-1 py-2 border border-gray-300 bg-white text-gray-600 rounded-xl text-xs font-bold"><i class="fab fa-whatsapp text-green-500 mr-1"></i> WhatsApp</button>
+                </div>
+
+                <button id="btn-sala-espera" onclick="falar('Entrando na sala de espera'); navigate('sala-espera');" class="w-full bg-primary-dark btn-pill text-white mb-3 hidden">Ir para Sala de Espera</button>
+                <button onclick="falar('Voltar ao início'); navigateTab('dashboard', document.getElementById('nav-dashboard'));" class="w-full bg-white border-2 border-gray-200 text-primary-dark btn-pill">Voltar ao Início</button>
+            </div>
+        </div>
+
+        <!-- SALA DE ESPERA VIRTUAL -->
+        <div id="sala-espera" class="screen bg-gray-900 text-white">
+            <div class="p-6 flex flex-col h-full justify-between pt-12">
+                <div class="text-center">
+                    <h2 class="text-sm font-bold text-gray-300 mb-1">Sua consulta com Dra. Ana Souza</h2>
+                    <h1 class="text-4xl font-bold text-accent-light mb-8">Começa em: 04:32</h1>
+                    
+                    <div class="bg-gray-800 border border-gray-700 rounded-2xl p-6 text-center shadow-lg">
+                        <div class="flex justify-center gap-6 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-accent-dark"><i class="fas fa-video"></i></div>
+                            <div class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-accent-dark"><i class="fas fa-microphone"></i></div>
+                        </div>
+                        <p class="text-sm font-bold text-gray-200">Testando câmera e microfone...</p>
+                        <p class="text-xs text-gray-400 mt-2">Sua consulta começa em breve.</p>
+                    </div>
+                </div>
+
+                <div class="mt-auto">
+                    <button class="w-full bg-accent-dark text-white rounded-full font-bold p-4 text-center mb-4 opacity-50 cursor-not-allowed">Entrar na consulta</button>
+                    <p class="text-[0.625rem] text-center text-gray-400 underline cursor-pointer" onclick="navigateTab('dashboard', document.getElementById('nav-dashboard'))">Se preferir, pode remarcar para atendimento presencial.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTADOS DE EXAMES -->
+        <div id="resultados-exames" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold">Resultados de Exames</h2>
+            </div>
+            <div class="p-6 flex flex-col gap-3">
+                <div class="card-rounded p-4 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="falar('Hemograma Completo. Baixar PDF'); alert('Iniciando download do PDF...')">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-file-pdf"></i></div>
+                        <div>
+                            <p class="font-bold text-sm">Hemograma Completo</p>
+                            <p class="text-[0.625rem] text-gray-500">Realizado em 10/03/2026</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-download text-gray-300"></i>
+                </div>
+                <div class="card-rounded p-4 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="falar('Glicemia. Baixar PDF'); alert('Iniciando download do PDF...')">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fas fa-file-pdf"></i></div>
+                        <div>
+                            <p class="font-bold text-sm">Glicemia em Jejum</p>
+                            <p class="text-[0.625rem] text-gray-500">Realizado em 10/03/2026</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-download text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARTEIRA DIGITAL -->
+        <div id="carteira" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold">Carteira Digital</h2>
+            </div>
+            <div class="p-6">
+                <div class="mb-6 rounded-2xl overflow-hidden shadow-md border border-gray-200 bg-white p-2 text-center cursor-pointer hover:opacity-95 transition" onclick="falar('Ampliar cartão do SUS'); abrirZoom();">
+                    <img id="img-cartao-sus" src="https://suporte-candidatos.gupy.io/servlet/rtaImage?eid=ka0bJ000000A9wT&feoid=00NHs00000BGpMw&refid=0EMbJ0000010EvJ" alt="Cartão Nacional de Saúde" class="w-full h-auto rounded-xl">
+                    <p class="text-[0.625rem] mt-3 font-bold uppercase tracking-wider text-gray-500"><i class="fas fa-expand-alt mr-1"></i> Toque para ampliar horizontalmente</p>
+                </div>
+                <h3 class="font-bold text-xs mb-3">Mais Documentos</h3>
+                <div class="flex flex-col gap-3">
+                    <button onclick="falar('Caderneta de Vacinação'); navigate('vacinas');" class="card-rounded p-4 flex justify-between items-center text-left active:scale-95 transition">
+                        <span class="font-bold text-sm flex items-center gap-3"><i class="fas fa-syringe text-primary-dark text-lg w-6"></i> Caderneta de Vacinação</span><i class="fas fa-chevron-right text-gray-300"></i>
+                    </button>
+                    <button onclick="falar('Documentos Pessoais'); navigate('doc-pessoais');" class="card-rounded p-4 flex justify-between items-center text-left active:scale-95 transition">
+                        <span class="font-bold text-sm flex items-center gap-3"><i class="fas fa-file-alt text-primary-dark text-lg w-6"></i> Documentos Pessoais</span><i class="fas fa-chevron-right text-gray-300"></i>
+                    </button>
+                    <button onclick="falar('Receitas Médicas'); navigate('receitas');" class="card-rounded p-4 flex justify-between items-center text-left active:scale-95 transition">
+                        <span class="font-bold text-sm flex items-center gap-3"><i class="fas fa-prescription text-primary-dark text-lg w-6"></i> Receitas Médicas</span><i class="fas fa-chevron-right text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DOCUMENTOS INTERATIVOS DA CARTEIRA -->
+        <!-- Caderneta de Vacinação -->
+        <div id="vacinas" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold">Caderneta de Vacinação</h2>
+            </div>
+            <div class="p-6 flex flex-col gap-3">
+                <div class="card-rounded p-4 border-l-4 border-accent-dark">
+                    <p class="text-[0.625rem] text-gray-500 mb-1">Dose Única • 15/04/2025</p>
+                    <h3 class="font-bold text-sm mb-1">COVID-19 (Bivalente)</h3>
+                    <p class="text-xs text-gray-600"><i class="fas fa-check-circle text-accent-dark mr-1"></i> Aplicada na UBS Centro</p>
+                </div>
+                <div class="card-rounded p-4 border-l-4 border-accent-dark">
+                    <p class="text-[0.625rem] text-gray-500 mb-1">Anual • 20/05/2025</p>
+                    <h3 class="font-bold text-sm mb-1">Influenza (Gripe)</h3>
+                    <p class="text-xs text-gray-600"><i class="fas fa-check-circle text-accent-dark mr-1"></i> Aplicada na UBS Centro</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentos Pessoais -->
+        <div id="doc-pessoais" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold">Documentos Pessoais</h2>
+            </div>
+            <div class="p-6 flex flex-col gap-3">
+                <div class="card-rounded p-5">
+                    <h3 class="text-[0.625rem] uppercase font-bold text-gray-500 tracking-wider mb-1">CPF</h3>
+                    <p class="font-bold text-lg text-primary-dark tracking-widest">123.456.789-00</p>
+                </div>
+                <div class="card-rounded p-5">
+                    <h3 class="text-[0.625rem] uppercase font-bold text-gray-500 tracking-wider mb-1">RG (Registro Geral)</h3>
+                    <p class="font-bold text-lg text-primary-dark tracking-widest">9.876.543</p>
+                    <p class="text-xs text-gray-500 mt-2">SSP/PE</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Receitas Médicas -->
+        <div id="receitas" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold">Receitas Médicas</h2>
+            </div>
+            <div class="p-6 flex flex-col gap-3">
+                <div class="card-rounded p-4 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="falar('Receita Losartana. Baixar PDF'); alert('Iniciando download da receita...')">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-accent-light text-primary-dark flex items-center justify-center text-xl"><i class="fas fa-prescription"></i></div>
+                        <div>
+                            <p class="font-bold text-sm">Uso Contínuo (Losartana)</p>
+                            <p class="text-[0.625rem] text-gray-500">Emitido: 10/03/2026</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-download text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONSULTAS MARCADAS -->
+        <div id="consultas" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold">Consultas Marcadas</h2>
+            </div>
+            <div class="p-6 flex flex-col gap-4">
+                <div class="card-rounded p-4 border-l-4 border-primary-dark">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[0.625rem] bg-accent-light px-2 py-1 rounded font-bold text-primary-dark">Clínica Geral</span>
+                        <span class="text-[0.625rem] text-gray-500">12 de Março</span>
+                    </div>
+                    <h3 class="font-bold text-sm mb-1">Dra. Ana Souza</h3>
+                    <p class="text-xs text-gray-600 mb-3"><i class="fas fa-map-marker-alt mr-1"></i> UBS Centro</p>
+                    <div class="flex gap-2">
+                        <button onclick="falar('Cancelar consulta'); alert('Consulta cancelada com sucesso!')" class="flex-1 bg-white border border-red-200 py-2 rounded-xl text-xs font-bold text-red-600">Cancelar</button>
+                        <button onclick="falar('Detalhes da consulta'); navigate('detalhes-consulta');" class="flex-1 bg-primary-dark text-white py-2 rounded-xl text-xs font-bold">Detalhes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETALHES DA CONSULTA -->
+        <div id="detalhes-consulta" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <button onclick="falar('Voltar'); navigateBack();" class="text-primary-dark text-xl p-2"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold">Detalhes do Agendamento</h2>
+            </div>
+            <div class="p-6">
+                <div class="card-rounded p-5 mb-4 border-t-4 border-primary-dark">
+                    <span class="bg-green-100 text-green-800 text-[0.625rem] font-bold px-2 py-1 rounded mb-3 inline-block">Confirmado</span>
+                    <h2 class="text-lg font-bold mb-1">Dra. Ana Souza</h2>
+                    <p class="text-xs text-gray-600 mb-5 border-b border-gray-100 pb-4">Clínica Geral</p>
+                    
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-calendar-day text-primary-dark mt-1 text-lg"></i>
+                            <div>
+                                <p class="text-xs font-bold text-gray-800">Data e Hora</p>
+                                <p class="text-[0.6875rem] text-gray-600">Terça-feira, 12 de Março às 09:00</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-primary-dark mt-1 text-lg"></i>
+                            <div>
+                                <p class="text-xs font-bold text-gray-800">Local</p>
+                                <p class="text-[0.6875rem] text-gray-600">UBS Centro<br>Rua da Saúde, 123 - Centro</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-info-circle text-primary-dark mt-1 text-lg"></i>
+                            <div>
+                                <p class="text-xs font-bold text-gray-800">Preparo e Orientações</p>
+                                <p class="text-[0.6875rem] text-gray-600">Chegue com 15 minutos de antecedência. Leve um documento original com foto.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="falar('Cancelar consulta'); alert('Consulta cancelada!'); navigateTab('dashboard', document.getElementById('nav-dashboard'));" class="w-full bg-white border border-red-200 text-red-600 btn-pill">Cancelar Consulta</button>
+            </div>
+        </div>
+
+        <!-- NOTIFICAÇÕES (Principal) -->
+        <div id="notificacoes" class="screen">
+            <div class="glass-header flex items-center gap-4">
+                <h2 class="text-lg font-bold ml-2">Notificações e Avisos</h2>
+            </div>
+            <div class="p-6 flex flex-col gap-3">
+                <div class="card-rounded p-4 cursor-pointer" onclick="navigate('consultas')">
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fas fa-bell text-primary-dark text-lg"></i>
+                        <h3 class="font-bold text-xs">Lembrete de Consulta</h3>
+                    </div>
+                    <p class="text-xs text-gray-600">A sua consulta com a Dra. Ana Souza é amanhã às 09:00 na UBS Centro.</p>
+                    <span class="text-[0.5625rem] text-gray-400 mt-2 block">Há 2 horas</span>
+                </div>
+                <div class="card-rounded p-4 cursor-pointer" onclick="navigate('resultados-exames')">
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fas fa-file-medical text-primary-dark text-lg"></i>
+                        <h3 class="font-bold text-xs">Resultado de Exame Disponível</h3>
+                    </div>
+                    <p class="text-xs text-gray-600">O seu hemograma completo já se encontra pronto para visualização.</p>
+                    <span class="text-[0.5625rem] text-gray-400 mt-2 block">Ontem</span>
                 </div>
             </div>
         </div>
@@ -630,6 +669,11 @@
             </div>
         </div>
     </div>
+    
+    <!-- Novo Botão Flutuante (FAB) de Acessibilidade Global -->
+    <div id="fab-acessibilidade" onclick="falar('Abrir ajustes de acessibilidade'); navigateTab('acessibilidade', document.getElementById('nav-acessibilidade'));" class="absolute right-5 w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl shadow-[0_4px_15px_rgba(0,0,0,0.3)] cursor-pointer hover:bg-blue-700 transition-transform active:scale-95 z-40 hidden" style="bottom: 85px;">
+        <i class="fas fa-universal-access"></i>
+    </div>
 
     <!-- Modal de Zoom da Carteirinha -->
     <div id="modal-zoom" onclick="fecharZoom();">
@@ -641,11 +685,9 @@
         </div>
     </div>
 
-    <!-- NAVBAR INFERIOR -->
+    <!-- NAVBAR INFERIOR (Agora só com 4 botões) -->
     <div class="navbar" id="bottom-nav" style="display: none;">
         <div id="nav-dashboard" onclick="navigateTab('dashboard', this)" class="active-nav"><i class="fas fa-home mb-1"></i>início</div>
-        <div id="nav-carteira" onclick="navigateTab('carteira', this)"><i class="fas fa-id-card mb-1"></i>carteira</div>
-        <div id="nav-consultas" onclick="navigateTab('consultas', this)"><i class="fas fa-calendar-alt mb-1"></i>consultas</div>
         <div id="nav-notificacoes" onclick="navigateTab('notificacoes', this)"><i class="fas fa-bell mb-1"></i>avisos</div>
         <div id="nav-acessibilidade" onclick="navigateTab('acessibilidade', this)"><i class="fas fa-cog mb-1"></i>ajustes</div>
         <div id="nav-perfil" onclick="navigateTab('perfil-menu', this)"><i class="fas fa-user mb-1"></i>perfil</div>
@@ -706,33 +748,41 @@
         }
     }
 
-    // 3. Controle da Barra de Navegação (Hotbar)
+    // 3. Controle da Barra de Navegação e Botão Flutuante (FAB)
     function updateNavbarVisibility(screenId) {
         const nav = document.getElementById('bottom-nav');
-        // Só aparece nas abas principais
-        const mainTabs = ['dashboard', 'carteira', 'consultas', 'notificacoes', 'acessibilidade', 'perfil-menu'];
-        if (mainTabs.includes(screenId)) {
-            nav.style.display = 'flex';
-        } else {
+        const fab = document.getElementById('fab-acessibilidade');
+        
+        // Esconder navbar nos ecrãs de sub-nível
+        if (['login', 'ajuda', 'sala-espera', 'confirmacao', 'adicionar-dep', 'agendamento1', 'agendamento2', 'detalhes-consulta', 'resultados-exames', 'vacinas', 'doc-pessoais', 'receitas', 'carteira', 'consultas', 'chatbot'].includes(screenId)) {
             nav.style.display = 'none';
+        } else {
+            nav.style.display = 'flex';
+        }
+
+        // Mostrar o FAB (botão flutuante de acessibilidade) APENAS nos ecrãs principais. 
+        // Esconde-se automaticamente no Chatbot, Formulários, Login, Agendamento e na própria tela de Ajustes.
+        const telasPrincipaisParaFAB = ['dashboard', 'carteira', 'consultas', 'notificacoes', 'perfil-menu'];
+        if (telasPrincipaisParaFAB.includes(screenId)) {
+            fab.style.display = 'flex';
+        } else {
+            fab.style.display = 'none';
         }
     }
     
     function updateNavbarState(screenId) {
-        // Remove 'active-nav' de todos os itens do menu
+        // Remove estado 'ativo' de todos os itens da barra de baixo
         document.querySelectorAll('.navbar div').forEach(el => el.classList.remove('active-nav'));
         
-        // Ativa apenas o item correspondente à tela atual
+        // Ativa o respetivo item da navbar baseando-se no ecrã atual
         if(screenId === 'dashboard') document.getElementById('nav-dashboard').classList.add('active-nav');
-        if(screenId === 'carteira') document.getElementById('nav-carteira').classList.add('active-nav');
-        if(screenId === 'consultas') document.getElementById('nav-consultas').classList.add('active-nav');
         if(screenId === 'notificacoes') document.getElementById('nav-notificacoes').classList.add('active-nav');
         if(screenId === 'acessibilidade') document.getElementById('nav-acessibilidade').classList.add('active-nav');
         if(screenId === 'perfil-menu') document.getElementById('nav-perfil').classList.add('active-nav');
     }
 
     function navigateTab(targetId, element) {
-        falar(element.innerText || targetId);
+        falar(element ? element.innerText : targetId);
         navigate(targetId);
     }
     
@@ -769,11 +819,11 @@
         
         btnPresencial.className = tipo === 'presencial' ? "flex-1 p-3 rounded-xl border-2 border-accent-dark bg-accent-light cursor-pointer text-center" : "flex-1 p-3 rounded-xl border border-gray-200 bg-white cursor-pointer text-center";
         btnPresencial.querySelector('i').className = tipo === 'presencial' ? "fas fa-hospital text-primary-dark text-xl mb-2" : "fas fa-hospital text-gray-400 text-xl mb-2";
-        btnPresencial.querySelector('p').className = tipo === 'presencial' ? "font-bold text-[11px] text-primary-dark" : "font-bold text-[11px] text-gray-600";
+        btnPresencial.querySelector('p').className = tipo === 'presencial' ? "font-bold text-[0.6875rem] text-primary-dark" : "font-bold text-[0.6875rem] text-gray-600";
         
         btnVideo.className = tipo === 'video' ? "flex-1 p-3 rounded-xl border-2 border-accent-dark bg-accent-light cursor-pointer text-center" : "flex-1 p-3 rounded-xl border border-gray-200 bg-white cursor-pointer text-center";
         btnVideo.querySelector('i').className = tipo === 'video' ? "fas fa-video text-primary-dark text-xl mb-2" : "fas fa-video text-gray-400 text-xl mb-2";
-        btnVideo.querySelector('p').className = tipo === 'video' ? "font-bold text-[11px] text-primary-dark" : "font-bold text-[11px] text-gray-600";
+        btnVideo.querySelector('p').className = tipo === 'video' ? "font-bold text-[0.6875rem] text-primary-dark" : "font-bold text-[0.6875rem] text-gray-600";
         
         const resumoIcon = document.getElementById('lbl-modalidade-resumo');
         const btnSala = document.getElementById('btn-sala-espera');
@@ -798,7 +848,6 @@
     
     // 5. Configurações de Acessibilidade
     function setTextSize(size, elemento) {
-        // Altera o root html para os 'rem' do tailwind escalarem de verdade
         const htmlRoot = document.documentElement;
         htmlRoot.classList.remove('text-large', 'text-xl');
         if(size === 'grande') htmlRoot.classList.add('text-large');
